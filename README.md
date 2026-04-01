@@ -1,4 +1,4 @@
-# My To-Do App (PHP + MySQL)
+# To-Do App In PHP And MYSQL
 
 
 ## Screenshots
@@ -19,30 +19,26 @@
 A simple to-do list application built with PHP, MySQL, HTML, and CSS.
 It supports full CRUD operations:
 
-- Create tasks
-- Read/display tasks
-- Update task completion status (done/undone)
-- Delete tasks
+- Create tasks (C)
+- Read/display tasks (R)
+- Update task completion status (done/undone) (U)
+- Delete tasks (D)
 
 
 ## Project Structure
 
-- `index.php` - Main app logic and UI rendering (handles all CRUD actions).
-- `db.php` - MySQL connection and automatic database/table creation.
+- `index.php` - Main app logic and UI rendering - handles all CRUD actions.
+- `db.php` - MySQL connection and database creation.
 - `styles.css` - Frontend styling.
 
 ## Requirements
 
-- PHP 8.0+
-- MySQL 5.7+
+- PHP
+- MySQL
 - PHP MySQLi extension enabled
-- A local server environment (XAMPP, WAMP, Laragon, MAMP, or built-in PHP server)
+- A local server environment - XAMPP
 
 ## Database Setup
-
-No manual SQL import is required. (Automatic)
-
-On startup, `db.php` will automatically:
 
 1. Connect to MySQL server.
 2. Create database `todo_app` if it does not exist.
@@ -65,7 +61,6 @@ All CRUD actions are handled in `index.php` using `POST` requests and prepared s
 ### 1) Add Task (Create)
 
 - Form submits with `action=add` and `task`.
-- Input is trimmed and capped at 255 chars.
 - Insert query:
   - `INSERT INTO tasks (task, done) VALUES (?, 0)`
 

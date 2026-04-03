@@ -41,7 +41,7 @@
                 <?php endif; ?>
 
                 <?php foreach ($tasks as $task): ?>
-                    <li class="task-item <?php echo (int)$task['done'] === 1 ? 'is-complete' : ''; ?>">
+                    <li class="task-item <?php echo (int)$task['done'] === 1 ? 'is-complete' : ''; ?>" data-id="<?php echo (int)$task['id']; ?>">
                         <div class="task-main">
                             <form action="src/toggle.php" method="post">
                                 <input type="hidden" name="id" value="<?php echo (int)$task['id']; ?>">
@@ -58,16 +58,56 @@
                             <span class="task-text">
                                 <?php echo htmlspecialchars((string)$task['task'], ENT_QUOTES, 'UTF-8'); ?>
                             </span>
+
+                            <form class="edit-form" action="src/edit.php" method="post">
+                                <input type="hidden" name="id" value="<?php echo (int)$task['id']; ?>">
+                                <input
+                                    class="edit-input"
+                                    type="text"
+                                    name="task"
+                                    value="<?php echo htmlspecialchars((string)$task['task'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    maxlength="255"
+                                    required
+                                >
+                                <button class="save-btn" type="submit">Save</button>
+                                <button class="cancel-btn" type="button">Cancel</button>
+                            </form>
                         </div>
 
-                        <form action="src/delete.php" method="post">
-                            <input type="hidden" name="id" value="<?php echo (int)$task['id']; ?>">
-                            <button class="delete-btn" type="submit" aria-label="Delete task">×</button>
-                        </form>
+                        <div class="task-actions">
+                            <button class="edit-btn" aria-label="Edit task">✎</button>
+
+                            <form action="src/delete.php" method="post">
+                                <input type="hidden" name="id" value="<?php echo (int)$task['id']; ?>">
+                                <button class="delete-btn" type="submit" aria-label="Delete task">×</button>
+                            </form>
+                        </div>
                     </li>
                 <?php endforeach; ?>
             </ul>
         </section>
     </main>
+
+    <script>
+        document.querySelectorAll('.task-item').forEach(item => {
+            const editBtn   = item.querySelector('.edit-btn');
+            const cancelBtn = item.querySelector('.cancel-btn');
+            const taskText  = item.querySelector('.task-text');
+            const editForm  = item.querySelector('.edit-form');
+
+            editBtn.addEventListener('click', () => {
+                taskText.style.display = 'none';
+                editForm.style.display = 'flex';
+                editBtn.style.display  = 'none';
+                editForm.querySelector('.edit-input').focus();
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                taskText.style.display = '';
+                editForm.style.display = 'none';
+                editBtn.style.display  = '';
+            });
+        });
+    </script>
 </body>
 </html>

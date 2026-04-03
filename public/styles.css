@@ -207,4 +207,7 @@ body {
     .task-text {
         font-size: 0.95rem;
     }
+    .task-item form {
+    margin: 0;
+}
 }

@@ -33,6 +33,7 @@ It supports full CRUD operations:
 
 ## Project Structure
 
+```
 todo-app/
 ├── config/
 │   ├── db.php          # Database connection
@@ -47,6 +48,7 @@ todo-app/
 ├── public/
 │   └── styles.css      # Styling
 └── index.php           # Entry point
+```
 
 ## Requirements
 

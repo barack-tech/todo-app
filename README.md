@@ -14,22 +14,39 @@
 
 <img width="800" height="911" alt="Tasks marked done" src="https://github.com/user-attachments/assets/22ee2177-ecbc-4aa1-ba2b-9f06578b1500" />
 
+### Final App Preview
+
+<img width="1076" height="912" alt="Final edit preview" src="https://github.com/user-attachments/assets/10b3d08a-8f41-44c1-83bb-f9b207f8fd59" />
 
 
-A simple to-do list application built with PHP, MySQL, HTML, and CSS.
+
+
+A simple to-do list application built with PHP, MySQL, HTML, Javascript and CSS.
 It supports full CRUD operations:
 
-- Create tasks (C)
-- Read/display tasks (R)
-- Update task completion status (done/undone) (U)
-- Delete tasks (D)
+- Create tasks.
+- Read/display tasks.
+- Update task completion status. (done/undone)
+- Edit/Rename tasks.
+- Delete tasks. 
 
 
 ## Project Structure
 
-- `index.php` - Main app logic and UI rendering - handles all CRUD actions.
-- `db.php` - MySQL connection and database creation.
-- `styles.css` - Frontend styling.
+todo-app/
+├── config/
+│   ├── db.php          # Database connection
+│   └── schema.sql      # Import once to set up the database
+├── src/
+│   ├── add.php         # Add task
+│   ├── delete.php      # Delete task
+│   ├── edit.php        # Edit task
+│   └── toggle.php      # Toggle task done/undone
+├── views/
+│   └── tasks.php       # HTML rendering
+├── public/
+│   └── styles.css      # Styling
+└── index.php           # Entry point
 
 ## Requirements
 
@@ -38,59 +55,19 @@ It supports full CRUD operations:
 - PHP MySQLi extension enabled
 - A local server environment - XAMPP
 
-## Database Setup
+## Setup
 
-1. Connect to MySQL server.
-2. Create database `todo_app` if it does not exist.
-3. Create table `tasks` if it does not exist.
+1. Clone the repository.
+2. Import the database schema:
+3. Update credentials in `config/db.php` if needed.
+4. Serve the project via XAMPP or any local PHP server.
 
-### Table Schema
+## Features
 
-`tasks`
-
-- `id` INT AUTO_INCREMENT PRIMARY KEY
-- `task` VARCHAR(255) NOT NULL
-- `done` TINYINT(1) DEFAULT 0
-- `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-
-## CRUD Flow
-
-All CRUD actions are handled in `index.php` using `POST` requests and prepared statements.
-
-### 1) Add Task (Create)
-
-- Form submits with `action=add` and `task`.
-- Insert query:
-  - `INSERT INTO tasks (task, done) VALUES (?, 0)`
-
-### 2) Display Tasks (Read)
-
-- Query:
-  - `SELECT id, task, done, created_at FROM tasks ORDER BY created_at DESC, id DESC`
-- Each task renders with:
-  - Task text
-  - Completion checkbox
-  - Delete button
-  - ID and status text
-
-### 3) Toggle Done/Undone (Update)
-
-- Checkbox form submits `action=toggle`, `id`, and optional `done=1`.
-- If checkbox is checked, `done=1`; otherwise `done=0`.
-- Update query:
-  - `UPDATE tasks SET done = ? WHERE id = ?`
-
-### 4) Delete Task (Delete)
-
-- Delete form submits `action=delete` and `id`.
-- Delete query:
-  - `DELETE FROM tasks WHERE id = ?`
-
-
-
-## Future Improvements (Optional)
-
-- Add task edit functionality.
-
+- Add tasks
+- Mark tasks as done or undone
+- Inline edit tasks
+- Delete tasks
+- Post/Redirect/Get pattern to prevent duplicate form submissions
+- Prepared statements throughout to prevent SQL injection
 
